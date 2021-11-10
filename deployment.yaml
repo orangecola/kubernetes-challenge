@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: web-challenge
+  name: web-challenge
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-challenge
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: web-challenge
+    spec:
+      containers:
+      - image: web-challenge
+        name: web-challenge
+        resources: {}
+        imagePullPolicy: Never
+        env:
+          - name: NAME
+            valueFrom:
+              configMapKeyRef:
+                name: env-name           # The ConfigMap this value comes from.
+                key: names
+status: {}
